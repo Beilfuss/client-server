@@ -27,6 +27,8 @@ while 1:
 
     message, clientAddress = serverSocket.recvfrom(2048)
 
+    print('Message [{}]: '.format(clientAddress), message)
+
     modifiedMessage = '[{}] OK ::: {}'.format(count, message).encode()
     serverSocket.sendto(modifiedMessage, clientAddress)
 
