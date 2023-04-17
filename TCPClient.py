@@ -17,6 +17,6 @@ while 1:
     sentence = input('Message to send...: ').encode()
     clientSocket.send(sentence)
     modifiedSentence = clientSocket.recv(1024)
-    print('Server reply......: ', modifiedSentence)
+    print('Server reply......: ', modifiedSentence.decode())
 
-    clientSocket.close()
+clientSocket.close()

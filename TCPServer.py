@@ -17,8 +17,6 @@ serverSocket.bind(('',serverPort))
 
 print('<<< Socket bind complete >>>')
 
-
-
 # print('The server is ready to receive')
 
 count = 0
@@ -31,11 +29,11 @@ while 1:
     
     sentence = connectionSocket.recv(1024)
 
-    print('Message [{}]: '.format(addr), sentence)
+    print('Message [{}]: '.format(addr), sentence.decode())
 
-    modifiedMessage = '[{}] OK ::: {}'.format(count, sentence).encode()
+    modifiedMessage = '[{}] OK ::: {}'.format(count, sentence.decode()).encode()
     connectionSocket.send(modifiedMessage)
 
     count += 1
 
-    connectionSocket.close()
+connectionSocket.close()
