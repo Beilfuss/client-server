@@ -1,15 +1,13 @@
 from socket import *
 
-# serverPort = 12000
+serverData = input('Host/IP Port [Default: localhost 8080]: ')
 
-serverName, serverPort = input('Host/IP Port [Default: localhost 8080]: ' ).split()
-
-if serverPort != '':
-    serverPort = int(serverPort)
-
-if serverName == '' and serverPort == '':
+if serverData == '':
     serverName = 'localhost'
     serverPort = 8080
+else:
+    serverName, serverPort = serverData.split()
+    serverPort = int(serverPort)
 
 serverSocket = socket(AF_INET, SOCK_STREAM)
 
@@ -40,4 +38,4 @@ while 1:
 
     count += 1
 
-connectionSocket.close()
+    connectionSocket.close()

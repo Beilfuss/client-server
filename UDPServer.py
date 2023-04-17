@@ -1,15 +1,13 @@
 from socket import *
 
-# serverPort = 12000
+serverData = input('Host/IP Port [Default: localhost 8080]: ')
 
-serverName, serverPort = input('Host/IP Port [Default: localhost 8080]: ' ).split()
-
-if serverPort != '':
-    serverPort = int(serverPort)
-
-if serverName == '' and serverPort == '':
+if serverData == '':
     serverName = 'localhost'
     serverPort = 8080
+else:
+    serverName, serverPort = serverData.split()
+    serverPort = int(serverPort)   
 
 serverSocket = socket(AF_INET, SOCK_DGRAM)
 
@@ -27,9 +25,9 @@ while 1:
 
     message, clientAddress = serverSocket.recvfrom(2048)
 
-    print('Message [{}]: '.format(clientAddress), message)
+    print('Message [{}]: '.format(clientAddress), message.decode())
 
-    modifiedMessage = '[{}] OK ::: {}'.format(count, message).encode()
+    modifiedMessage = '[{}] OK ::: {}'.format(count, message.decode()).encode()
     serverSocket.sendto(modifiedMessage, clientAddress)
 
     count += 1

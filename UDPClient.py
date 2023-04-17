@@ -1,18 +1,13 @@
 from socket import *
 
-'''
-serverName = 'ine5615.matheus.beilfuss.vms.ufsc.br'
-serverPort = 12000
-'''
+serverData = input('Host/IP Port [Default: localhost 8080]: ')
 
-serverName, serverPort = input('Host/IP Port [Default: localhost 8080]:' ).split()
-
-if serverPort != '':
-    serverPort = int(serverPort)
-
-if serverName == '' and serverPort == '':
+if serverData == '':
     serverName = 'localhost'
     serverPort = 8080
+else:
+    serverName, serverPort = serverData.split()
+    serverPort = int(serverPort)   
 
 clientSocket = socket(AF_INET, SOCK_DGRAM)
 
@@ -21,6 +16,6 @@ while 1:
     message = input("Message to send...: ").encode()
     clientSocket.sendto(message,(serverName, serverPort))
     modifiedMessage, serverAddress = clientSocket.recvfrom(2048)
-    print("Server reply......: ", modifiedMessage)
+    print("Server reply......: ", modifiedMessage.decode())
 
 clientSocket.close()
