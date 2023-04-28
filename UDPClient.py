@@ -15,6 +15,11 @@ while 1:
 
     message = input("Message to send...: ").encode()                # Recebe mensagem do usuário através do terminal e converte de "str" para "bytes-like"
     clientSocket.sendto(message,(serverName, serverPort))           # O método "sendto" acrescenta o endereço de destino (serverName e serverPort) à mensagem e envia o pacote resultante pelo socket do processo (clientSocket)
+    
+    if message.decode() == 'quit':                                  # Fecha conexão se a mensagem do usuário for "quit"
+        clientSocket.close()
+        break
+
     modifiedMessage, serverAddress = clientSocket.recvfrom(2048)    # Recebe mensagem e endereço do servidor. Define tamanho do buffer como 2048
     print("Server reply......: ", modifiedMessage.decode())         # Imprime a mensagem vinda do servidor na tela
 

@@ -25,6 +25,10 @@ while 1:
 
     message, clientAddress = serverSocket.recvfrom(2048)                        # Recebe mensagem e endereço do cliente. Define tamanho do buffer como 2048
 
+    if message.decode() == 'quit':                                                 # Fecha conexão se a mensagem do usuário for "quit"
+        serverSocket.close()
+        break
+
     print('Message [{}]: '.format(clientAddress), message.decode())             # Imprime na tela do servidor a mensagem do cliente
 
     modifiedMessage = '[{}] OK ::: {}'.format(count, message.decode()).encode() # Modifica a mensagem para enviar de volta ao cliente
